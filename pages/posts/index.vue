@@ -1,12 +1,16 @@
 <template>
-  <div class="container">
-    <h1>Posts Page</h1>
-  </div>
+<div class="container">
+  <h1>Posts Page</h1>
+  <PostsList />
+</div>
 </template>
 
 <script>
+import PostsList from '@/components/Posts/PostsList'
 export default {
-  
+  components: {
+    PostsList
+  }
 }
 </script>
 
@@ -15,6 +19,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100,150,50,0.2);
+  flex-direction: column;
+  background: rgba(100, 150, 50, 0.2);
 }
 </style>

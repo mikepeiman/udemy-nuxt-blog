@@ -3,34 +3,36 @@
   <section class="intro">
     <section class="container">
       <h1 class="title">Live a Life Examined</h1>
-
-    </section>
-    <section class="featured-posts">
-      <PostPreview 
-        id="1"
-        thumbnail="https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350"
-        title="Hello there!"
-        previewText="This is my first post!"/>
-      <PostPreview />
-      <PostPreview />
     </section>
   </section>
-
 </section>
 </template>
 
 <script>
 import PostPreview from '@/components/Posts/PostPreview'
 export default {
+  data() {
+    return {
+      imageNum: null,
+      lorem: null,
+      numPosts: 0
+    }
+  },
   components: {
     PostPreview
+  },
+  methods: {
+    getRandomInt(min, max) {
+      return Math.floor(Math.random() * Math.floor(max)) + min;
+    }
+  },
+  mounted() {
+    this.numPosts = this.getRandomInt(3, 3)
+    console.log('Mounted hook fired', this.numPosts)
+
   }
-},
-methods: {
-  
 }
 </script>
-
 
 <style scoped>
 .home-page {
@@ -44,13 +46,13 @@ methods: {
   background: url('~static/papers.co-mn32-forest-wood-fog-flare-nature-green-1600-900-at8.jpg');
   background-size: cover;
 }
+
 .container {
-  background: rgba(255,255,255,.5);
+  background: rgba(255, 255, 255, .5);
   padding: 2em;
   border: 2px solid white;
   margin-bottom: 2em;
 }
-
 
 .title {
   font-family: 'Montserrat', 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
@@ -59,7 +61,7 @@ methods: {
   font-weight: 300;
   font-size: 3em;
   color: #35495e;
-  border-bottom: 5px solid rgba(50,100,150,.5);
+  border-bottom: 5px solid rgba(50, 100, 150, .5);
   margin-bottom: 1em;
   /* letter-spacing: 1px; */
 }
