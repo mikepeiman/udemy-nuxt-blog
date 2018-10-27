@@ -1,8 +1,13 @@
 <template>
 <section class="featured-posts">
-  <PostPreview id="1" :is-admin="isAdmin" thumbnail="https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350" title="Hello there!" previewText="This is my first post!" />
-  <PostPreview id="2" :is-admin="isAdmin" thumbnail="https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350" title="Hello there!" previewText="This is my first post!" />
-  <PostPreview id="3" :is-admin="isAdmin" thumbnail="https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350" title="Hello there!" previewText="This is my first post!" />
+  <PostPreview 
+  v-for="post in posts"
+  :key="post.id"
+  :id="post.id"
+  :is-admin="isAdmin" 
+  :thumbnail="post.thumbnail"
+  :title="post.title"
+  :previewText="post.previewText" />
 </section>
 </template>
 
@@ -16,6 +21,11 @@ export default {
     isAdmin: {
     type: Boolean,
     default: false
-  }}
+  },
+    posts: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>
