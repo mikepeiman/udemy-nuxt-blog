@@ -22,6 +22,7 @@ export default {
   // },
   asyncData(context, callback) {
     // return new Promise()
+    console.log('asyncData executed in /pages. Context: ', context)
     setTimeout(() => {
       // return {
       callback(null, {
