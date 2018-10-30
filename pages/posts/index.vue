@@ -59,6 +59,14 @@ export default {
       context.error(e);
     });
   }
+  // created() {
+  //   this.$store.dispatch('setPosts', this.loadedPosts)
+  //   // console.log(this.$store)
+  //   // console.log(this.$store.getters)
+  //   // console.log(this.$store.getters.loadedPosts)
+  //   // this.loadedPosts.forEach(post => {
+  //   //   console.log('Post ID: ' + post.id, post)
+  //   }
 };
 </script>
 
