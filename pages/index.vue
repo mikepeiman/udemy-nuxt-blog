@@ -10,40 +10,14 @@
 </template>
 
 <script>
-import PostPreview from '@/components/Posts/PostPreview'
 import PostsList from '@/components/Posts/PostsList'
 export default {
-  // data() {
-  //   return {
-  //     imageNum: null,
-  //     lorem: null,
-  //     numPosts: 0
-  //   }
-  // },
-  asyncData(context, callback) {
-    // return new Promise()
-    console.log('asyncData executed in /pages. Context: ', context)
-    setTimeout(() => {
-      // return {
-      callback(null, {
-        loadedPosts: [{
-            id: '1',
-            title: 'Post One',
-            previewText: 'This is the first post',
-            thumbnail: 'https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350'
-          },
-          {
-            id: '2',
-            title: 'Post Two',
-            previewText: 'This is the second post',
-            thumbnail: 'https://images.pexels.com/photos/1124092/pexels-photo-1124092.jpeg?cs=srgb&dl=abstract-art-background-1124092.jpg&fm=jpg'
-          }
-        ]
-      })
-    }, 1500)
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   },
   components: {
-    PostPreview,
     PostsList
   },
   methods: {

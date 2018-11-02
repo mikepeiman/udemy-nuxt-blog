@@ -52,18 +52,13 @@ export default {
 <style scoped>
 .post-thumbnail {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
   border:  none;
 }
-.post-preview {
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid white; */
-  padding: 0;
-}
+
 .post-snippet {
   padding: 1em;
   margin-bottom: 1em;
@@ -75,6 +70,7 @@ export default {
     font-family: 'Montserrat', 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
+  color: #222;
   font-weight: 300;
   font-size: 3em;
   border-bottom: 1px solid #eee;
