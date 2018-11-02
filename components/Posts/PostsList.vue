@@ -1,6 +1,6 @@
 <template>
 <section class="featured-posts">
-  <PostPreview v-for="post in posts" :key="post.id" :id="post.id" :is-admin="isAdmin" :thumbnail="post.thumbnail" :title="post.title" :previewText="post.previewText" />
+  <PostPreview v-for="post in posts" :key="post.id" :id="post.id" :is-admin="isAdmin" :thumbnail="post.thumbnail" :title="post.title" :author="post.author" :previewText="post.previewText" />
 </section>
 </template>
 
@@ -24,10 +24,26 @@ export default {
 </script>
 
 <style scoped>
-article {
-  height: 100vh;
-}
 .featured-posts {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+
+}
+
+@media screen and (min-width: 640px) {
+    .featured-posts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .featured-posts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* .featured-posts {
   padding: .5vw;
   font-size: 0;
   display: -ms-flexbox;
@@ -50,7 +66,7 @@ article {
 
 .featured-posts .post-preview article {
   height: 500px;
-}
+} */
 /* .featured-posts a article div {
   width: 100%;
   height: auto;
