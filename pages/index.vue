@@ -42,8 +42,8 @@ export default {
   text-align: center;
   flex-direction: column;
 
-  background: url('~static/papers.co-mn32-forest-wood-fog-flare-nature-green-1600-900-at8.jpg');
-  background-size: cover;
+  /* background: url('~static/papers.co-mn32-forest-wood-fog-flare-nature-green-1600-900-at8.jpg'); */
+  /* background-size: cover; */
 }
 
 .container {

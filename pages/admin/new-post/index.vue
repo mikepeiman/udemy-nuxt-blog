@@ -37,7 +37,10 @@ export default {
       this.$router.push('/admin')
     },
     onSubmitted(postData) {
-      axios.post('https://udemy-nuxt-blog-3c87b.firebaseio.com/posts.json', postData)
+      axios.post('https://udemy-nuxt-blog-3c87b.firebaseio.com/posts.json', {
+        ...postData, 
+        updatedDate: new Date()
+        })
       .then(result => console.log(result))
       .catch(error => console.log(error))
     }
