@@ -8,21 +8,24 @@
 
 <script>
 import BlogPostForm from '@/components/Admin/BlogPostForm'
+import axios from 'axios'
 
 export default {
   layout: 'admin',
   components: {
     BlogPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: 'Mike Peiman',
-        title: 'My Witty Words',
-        content: 'This is amazing, you are a champion!',
-        thumbnailLink: 'https://images.pexels.com/photos/953206/pexels-photo-953206.jpeg?auto=compress&cs=tinysrgb&h=350'
+  asyncData(context) {
+    return axios.get('https://udemy-nuxt-blog-3c87b.firebaseio.com/posts/' + context.params.postID + '.json')
+    .then(res => {
+      console.log('context.params.postID: ', context.params.postID)
+      console.log('loadedPost: ', res.data)
+      return {
+        loadedPost: res.data
+        
       }
-    }
+    })
+    .catch(e => context.error(e))
   }
 }
 </script>

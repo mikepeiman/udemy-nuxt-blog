@@ -1,15 +1,14 @@
 <template>
-      <form @submit.prevent="onSave">
-        <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
-        <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-        <AppControlInput v-model="editedPost.thumbnail">Thumbnail Link</AppControlInput>
-        <AppControlInput control-type="textarea" v-model="editedPost.content">Content</AppControlInput>
-        <AppControlInput control-type="textarea" v-model="editedPost.previewText">Preview Text</AppControlInput>
-        <AppButton type="submit">Save</AppButton>
-        <AppButton type="button" style="margin-left: 10px" btn-style="cancel" @click="onCancel">Cancel</AppButton>
-      </form>
+<form @submit.prevent="onSave">
+  <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
+  <AppControlInput v-model="editedPost.title">Title</AppControlInput>
+  <AppControlInput v-model="editedPost.thumbnail">Thumbnail Link</AppControlInput>
+  <AppControlInput control-type="textarea" v-model="editedPost.content">Content</AppControlInput>
+  <AppControlInput control-type="textarea" v-model="editedPost.previewText">Preview Text</AppControlInput>
+  <AppButton type="submit">Save</AppButton>
+  <AppButton type="button" style="margin-left: 10px" btn-style="cancel" @click="onCancel">Cancel</AppButton>
+</form>
 </template>
-
 
 <script>
 import AppControlInput from '@/components/UI/AppControlInput'
@@ -28,7 +27,8 @@ export default {
   },
   data() {
     return {
-      editedPost: this.post ? { ...this.post } : {
+      editedPost: this.post ? { ...this.post
+      } : {
         author: '',
         title: '',
         thumbnail: '',
@@ -43,13 +43,13 @@ export default {
       this.$emit('submit', this.editedPost)
       let inputs = document.querySelectorAll('input')
       inputs.forEach(input => {
-         input.value = ''
+        input.value = ''
       });
-            let textareas = document.querySelectorAll('textarea')
+      let textareas = document.querySelectorAll('textarea')
       textareas.forEach(textarea => {
-         textarea.value = ''
+        textarea.value = ''
       });
-      
+
     },
     onCancel() {
       // navigate back
@@ -57,4 +57,13 @@ export default {
     }
   }
 }
+
 </script>
+
+<style scoped>
+form {
+  width: 80vw;
+  margin: 5vh auto;
+}
+</style>
+
