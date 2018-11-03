@@ -1,9 +1,9 @@
 <template>
-  <div class="admin-post-page">
-    <section class="post-update-form">
-      <BlogPostForm :post="loadedPost" />
-    </section>
-  </div>
+<div class="admin-post-page">
+  <section class="post-update-form">
+    <BlogPostForm :post="loadedPost" @submit="onSubmit" />
+  </section>
+</div>
 </template>
 
 <script>
@@ -16,17 +16,28 @@ export default {
     BlogPostForm
   },
   asyncData(context) {
-    return axios.get('https://udemy-nuxt-blog-3c87b.firebaseio.com/posts/' + context.params.postID + '.json')
-    .then(res => {
-      console.log('context.params.postID: ', context.params.postID)
-      console.log('loadedPost: ', res.data)
-      return {
-        loadedPost: res.data
-        
-      }
-    })
-    .catch(e => context.error(e))
+    return axios
+      .get(process.env.baseUrl + '/posts/' + context.params.postID + '.json')
+      .then(res => {
+        console.log('context.params: ', context.params)
+        console.log('loadedPost: ', res.data)
+        return {
+          loadedPost: { ...res.data,
+            id: context.params.postID
+          }
+
+        }
+      })
+      .catch(e => context.error(e))
+  },
+  methods: {
+    onSubmit(editedPost) {
+      this.$store.dispatch('editPost', editedPost)
+        .then(() => {
+          this.$router.push('/admin')
+        })
+
+    }
   }
 }
 </script>
-

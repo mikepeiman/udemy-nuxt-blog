@@ -7,7 +7,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: "Mike's Blog",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -22,12 +22,17 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#3399ff', height: '10px', duration: 2500 },
+  loadingIndicator: {
+    name: 'circle',
+    color: '#3399ff'
+  },
 
   /*
   ** Global CSS
   */
   css: [
+    '@/assets/styles/main.css'
   ],
 
   /*
@@ -60,5 +65,8 @@ module.exports = {
     extend(config, ctx) {
       
     }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://udemy-nuxt-blog-3c87b.firebaseio.com'
   }
 }

@@ -26,7 +26,7 @@ export default {
   },
   nuxtServerInit(vuexContext, context) {
     return axios.get(
-        'https://udemy-nuxt-blog-3c87b.firebaseio.com/posts.json'
+        process.env.baseUrl + '/posts.json'
       )
       .then(res => {
         console.log('axios.get promise returned')
