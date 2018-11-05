@@ -83,9 +83,10 @@ const createStore = () => {
             console.log('Result idToken: ', result.idToken)
             vuexContext.commit('setToken', result.idToken)
             localStorage.setItem('token', result.idToken)
-            localStorage.setItem('tokenExpiration', new Date().getTime() + (result.expiresIn * 1000))
+            localStorage.setItem('tokenExpiration', new Date().getTime() + +(result.expiresIn * 1000))
+            // adding + immediately preceding a variable, converts to number, same as Number.parseInt(var)
             Cookie.set('jwt', result.idToken)
-            Cookie.set('expirationDate', new Date().getTime() + (result.expiresIn * 1000))
+            Cookie.set('expirationDate', new Date().getTime() + +(result.expiresIn * 1000))
             vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
           })
           .catch(e => console.log('Error: ', e))
@@ -100,7 +101,7 @@ const createStore = () => {
         let token
         let expirationDate
         if (req) {
-          console.log('initAuth: if(req) true')
+          console.log('initAuth: if(req) true, req: ', req)
           if (!req.headers.cookie) {
             return
           }
@@ -120,10 +121,12 @@ const createStore = () => {
           console.log('initAuth: if(req) not true')
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
-  
-          if (new Date().getTime() > +expirationDate || !token) {
-            return
-          }
+        }
+        console.log('debug initAuth: ', new Date().getTime(), expirationDate)
+        if (new Date().getTime() > +expirationDate || !token) {
+          console.log('no token or invalid token')
+          vuexContext.commit('clearToken')
+          return
         }
 
         vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
