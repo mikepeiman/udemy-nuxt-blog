@@ -15,7 +15,11 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Charmonman|Montserrat' }
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://fonts.googleapis.com/css?family=Charmonman|Montserrat'
+      }
     ]
   },
 
@@ -31,14 +35,14 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-    '@/assets/styles/main.css'
-  ],
+  css: ['@/assets/styles/main.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/core-components.js',
+    '@/plugins/date-filter.js'
   ],
 
   /*
@@ -53,6 +57,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.BASE_URL || 'https://udemy-nuxt-blog-3c87b.firebaseio.com'
   },
 
   /*
@@ -62,11 +67,27 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      
-    }
+    extend(config, ctx) {}
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://udemy-nuxt-blog-3c87b.firebaseio.com'
+    baseUrl:
+      process.env.BASE_URL || 'https://udemy-nuxt-blog-3c87b.firebaseio.com',
+    fbAPIkey: 'AIzaSyDw8bm__eqkygCYkpUT6XG-PpbmAc-n-Ac'
+  },
+  // generate: {
+
+  // },
+  // rootDir: '/',
+  // router: {
+
+  // },
+  // srcDir: 'client-app/' (for layouts, pages, components)
+  // transition: page,
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
+  router: {
+    middleware: 'log'
   }
 }

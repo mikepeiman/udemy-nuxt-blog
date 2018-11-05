@@ -14,6 +14,7 @@ import axios from 'axios'
 
 export default {
   layout: 'admin',
+  middleware: ['checkAuth', 'auth'],
   components: {
     BlogPostForm
   },

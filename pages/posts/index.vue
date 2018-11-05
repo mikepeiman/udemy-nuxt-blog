@@ -13,6 +13,7 @@ import PostsList from '@/components/Posts/PostsList'
 import axios from 'axios'
 
 export default {
+  // middleware: 'log', // for log.js in /middleware folder
   components: {
     PostsList
   },
@@ -22,14 +23,14 @@ export default {
     }
   },
   created() {
-    console.log('Store: ', this.$store);
+    console.log('posts/index.vue created() hook fired');
   },
   nuxtServerInit(vuexContext, context) {
     return axios.get(
         process.env.baseUrl + '/posts.json'
       )
       .then(res => {
-        console.log('axios.get promise returned')
+        console.log('/posts/index.vue, inside of nuxtServerInit, axios.get.then promise returned')
         const postsArray = []
         for (let key in res.data) {
           postsArray.push({ ...res.data[key],
