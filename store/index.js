@@ -125,12 +125,19 @@ const createStore = () => {
         console.log('debug initAuth: ', new Date().getTime(), expirationDate)
         if (new Date().getTime() > +expirationDate || !token) {
           console.log('no token or invalid token')
-          vuexContext.commit('clearToken')
+          vuexContext.commit('logout')
           return
         }
 
         vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
         vuexContext.commit('setToken', token)
+      },
+      logout(vuexContext) {
+        vuexContext.commit('clearToken')
+        Cookie.remove('jwt')
+        Cookie.remove('expirationDate')
+        localStorage.removeItem('token')
+        localStorage.removeItem('tokenExpiration')
       }
     },
     getters: {
