@@ -21,6 +21,12 @@ import axios from 'axios'
 
 export default {
   asyncData(context) {
+    if (context.payload) { // context only has the payload property when using the "generate" SSG command
+    console.log('/posts/_id index.vue asyncData, if (context.payload) == true')
+      return {
+        loadedPost: context.payload.postData
+      }
+    }
     return axios.get(process.env.baseUrl + '/posts/' + context.params.id + '.json')
     .then(res => {
       return {

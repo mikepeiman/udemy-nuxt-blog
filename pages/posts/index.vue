@@ -30,7 +30,7 @@ export default {
         process.env.baseUrl + '/posts.json'
       )
       .then(res => {
-        console.log('/posts/index.vue, inside of nuxtServerInit, axios.get.then promise returned')
+        console.log('/posts/index.vue inside of nuxtServerInit axios.get.then promise returned: res.data: ', res.data)
         const postsArray = []
         for (let key in res.data) {
           postsArray.push({ ...res.data[key],

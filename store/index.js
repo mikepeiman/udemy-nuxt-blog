@@ -30,21 +30,23 @@ const createStore = () => {
       }
     },
     actions: {
-      nuxtServerInit(vuexContext, context) {
-        console.log('store/index.js nuxtServerInit actions hook fired')
-        return axios.get(
-          process.env.baseUrl + '/posts.json'
-        )
-        .then(res => {
-          console.log('store/index.js, inside of nuxtServerInit, axios.get.then promise returned')
-          const postsArray = []
-          for (let key in res.data) {
-            postsArray.push({ ...res.data[key], id: key})
-          }
-          vuexContext.commit('setPosts', postsArray)
-        })
-        .catch(e => context.error(e))
-      },
+      // nuxtServerInit(vuexContext, context) {
+      //   console.log('store/index.js nuxtServerInit actions hook fired')
+      //   return axios.get(
+      //     process.env.baseUrl + '/posts.json'
+      //   )
+      //   .then(res => {
+      //     // console.log('store/index.js, inside of nuxtServerInit, axios.get.then promise returned - res.data: ', res.data)
+      //     const postsArray = []
+      //     for (let key in res.data) {
+      //       // console.log('key: ', key)
+      //       // console.log('res.data[key]: ', res.data[key])
+      //       postsArray.push({ ...res.data[key], id: key})
+      //     }
+      //     vuexContext.commit('setPosts', postsArray)
+      //   })
+      //   .catch(e => context.error(e))
+      // },
       setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts)
       },
@@ -117,10 +119,13 @@ const createStore = () => {
             .split(';')
             .find(c => c.trim().startsWith('expirationDate='))
             .split('=')[1]
-        } else {
+        } else if (process.client) {
           console.log('initAuth: if(req) not true')
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
+        } else {
+          token = null
+          expirationDate = null
         }
         console.log('debug initAuth: ', new Date().getTime(), expirationDate)
         if (new Date().getTime() > +expirationDate || !token) {
@@ -136,8 +141,10 @@ const createStore = () => {
         vuexContext.commit('clearToken')
         Cookie.remove('jwt')
         Cookie.remove('expirationDate')
-        localStorage.removeItem('token')
-        localStorage.removeItem('tokenExpiration')
+        if (process.client) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('tokenExpiration')
+        }
       }
     },
     getters: {

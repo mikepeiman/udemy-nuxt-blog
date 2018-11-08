@@ -41,15 +41,14 @@ export default {
     onSave() {
       // save the post
       this.$emit('submit', this.editedPost)
-      let inputs = document.querySelectorAll('input')
-      inputs.forEach(input => {
-        input.value = ''
-      });
-      let textareas = document.querySelectorAll('textarea')
-      textareas.forEach(textarea => {
-        textarea.value = ''
-      });
-
+      // let inputs = document.querySelectorAll('input')
+      // inputs.forEach(input => {
+      //   input.value = ''
+      // });
+      // let textareas = document.querySelectorAll('textarea')
+      // textareas.forEach(textarea => {
+      //   textarea.value = ''
+      // });
     },
     onCancel() {
       // navigate back

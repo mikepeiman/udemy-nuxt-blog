@@ -1,4 +1,6 @@
 const pkg = require('./package')
+const bodyParser = require('body-parser')
+const axios = require('axios')
 
 module.exports = {
   mode: 'universal',
@@ -89,5 +91,32 @@ module.exports = {
   },
   router: {
     middleware: 'log'
+  },
+  generate: {
+    // to customize the SSG generator functionality. Requires a function that returns an array of routes. This can be a promise.
+    routes: function() {
+      return axios.get('https://udemy-nuxt-blog-3c87b.firebaseio.com/posts.json')
+      .then(res => {
+        console.log('res from config generate: ', res)
+        const routes = []
+        for (let key in res.data) {
+          console.log('key (in nuxt.config.js generate): ', key)
+          // console.log('res.data: ', res.data)
+          // simple version, push string to array:
+          // routes.push('/posts/' + key)
+          
+          // more complex version to limit HTTP requests - get all post data now
+          routes.push({
+            route: '/posts/' + key, 
+            payload: {postData: res.data[key]}
+        })
+        console.log('key at end of for loop iteration: ', key)
+        }
+        return routes
+      })
+      // return [
+      //   '/posts/-LQKJmzGk0BDFCkjQQHa'
+      // ]
+    }
   }
 }
